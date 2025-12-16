@@ -4,19 +4,84 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodoro Timer</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="A beautiful, accessible Pomodoro Timer to boost your productivity with focused work sessions.">
+    <meta name="keywords" content="pomodoro, timer, productivity, focus, time management">
+    <meta name="author" content="Focus Timer">
+    <title>Focus Timer - Pomodoro Technique</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="src/css/variables.css">
+    <link rel="stylesheet" href="src/css/base.css">
+    <link rel="stylesheet" href="src/css/components.css">
+    <link rel="stylesheet" href="src/css/animations.css">
+    <link rel="stylesheet" href="src/css/responsive.css">
+    <link rel="stylesheet" href="src/css/accessibility.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="title">Pomodoro Timer</h1>
-        <p class="timer" id="timer">25:00</p>
-        <div class="button-wrapper">
-            <button id="start">Start</button>
-            <button id="stop">Stop</button>
-            <button id="reset">Reset</button>
+    <main class="app-container">
+        <div class="timer-card">
+            <header class="header">
+                <h1 class="title">Focus Timer</h1>
+                <p class="subtitle">Stay productive with the Pomodoro Technique</p>
+            </header>
+            <nav class="modes" role="tablist" aria-label="Timer modes">
+                <button class="mode-btn active" id="pomodoro" role="tab" aria-selected="true" aria-label="Pomodoro mode: 25 minutes">
+                    <span class="mode-icon"></span>
+                    <span class="mode-text">Focus</span>
+                </button>
+                <button class="mode-btn" id="short-break" role="tab" aria-selected="false" aria-label="Short break: 5 minutes">
+                    <span class="mode-icon"></span>
+                    <span class="mode-text">Short Break</span>
+                </button>
+                <button class="mode-btn" id="long-break" role="tab" aria-selected="false" aria-label="Long break: 15 minutes">
+                    <span class="mode-icon"></span>
+                    <span class="mode-text">Long Break</span>
+                </button>
+            </nav>
+            <div class="timer-wrapper">
+                <svg class="progress-ring" width="280" height="280">
+                    <circle class="progress-ring__bg" cx="140" cy="140" r="120"></circle>
+                    <circle class="progress-ring__circle" cx="140" cy="140" r="120" id="progress-circle"></circle>
+                </svg>
+                <div class="timer-content">
+                    <time class="timer" id="timer" aria-live="polite" aria-atomic="true">25:00</time>
+                    <p class="session-label" id="session-label">Focus Session</p>
+                </div>
+            </div>
+            <div class="controls" role="group" aria-label="Timer controls">
+                <button class="control-btn primary" id="start" aria-label="Start timer">
+                    <span class="btn-icon" id="start-icon"></span>
+                    <span class="btn-text">Start</span>
+                </button>
+                <button class="control-btn secondary" id="reset" aria-label="Reset timer">
+                    <span class="btn-icon"></span>
+                    <span class="btn-text">Reset</span>
+                </button>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Sessions Today</span>
+                    <span class="stat-value" id="sessions-count">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Time</span>
+                    <span class="stat-value" id="total-time">0m</span>
+                </div>
+            </div>
+            <div class="settings-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="sound-toggle" checked aria-label="Toggle sound notifications">
+                    <span class="slider"></span>
+                </label>
+                <span class="toggle-label">Sound</span>
+            </div>
         </div>
-    </div>
-    <script src="index.js"></script>
+    </main>
+    <script type="module" src="src/js/main.js"></script>
 </body>
 </html>

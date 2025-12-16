@@ -1,86 +1,8 @@
 /* ============================================
-   POMODORO TIMER - PROFESSIONAL STYLING
-   Human-Centered Design with Modern UX
+   COMPONENTS
    ============================================ */
 
-:root {
-  /* Color Palette */
-  --primary-color: #ff6b6b;
-  --primary-hover: #ee5a5a;
-  --secondary-color: #4ecdc4;
-  --secondary-hover: #45b8b0;
-  --success-color: #51cf66;
-  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --card-bg: #ffffff;
-  --text-primary: #2d3748;
-  --text-secondary: #718096;
-  --border-color: #e2e8f0;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.15);
-  
-  /* Spacing */
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 1.5rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 3rem;
-  
-  /* Typography */
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.5rem;
-  --font-size-2xl: 2rem;
-  --font-size-3xl: 3rem;
-  
-  /* Animation */
-  --transition-fast: 0.15s ease;
-  --transition-base: 0.3s ease;
-  --transition-slow: 0.5s ease;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--font-family);
-  background: var(--background);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: var(--spacing-md);
-  line-height: 1.6;
-  color: var(--text-primary);
-  overflow-x: hidden;
-}
-
-.app-container {
-  width: 100%;
-  max-width: 480px;
-  animation: fadeIn 0.6s ease-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* ============================================
-   TIMER CARD
-   ============================================ */
-
+/* Timer Card */
 .timer-card {
   background: var(--card-bg);
   border-radius: 24px;
@@ -95,10 +17,7 @@ body {
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
-
+/* Header */
 .header {
   text-align: center;
   margin-bottom: var(--spacing-lg);
@@ -118,10 +37,7 @@ body {
   font-weight: 400;
 }
 
-/* ============================================
-   MODE BUTTONS
-   ============================================ */
-
+/* Mode Buttons */
 .modes {
   display: flex;
   gap: var(--spacing-xs);
@@ -173,10 +89,7 @@ body {
   font-size: 0.75rem;
 }
 
-/* ============================================
-   TIMER DISPLAY WITH PROGRESS RING
-   ============================================ */
-
+/* Timer Display */
 .timer-wrapper {
   position: relative;
   display: flex;
@@ -228,10 +141,7 @@ body {
   font-weight: 500;
 }
 
-/* ============================================
-   CONTROL BUTTONS
-   ============================================ */
-
+/* Control Buttons */
 .controls {
   display: flex;
   gap: var(--spacing-md);
@@ -291,10 +201,7 @@ body {
   line-height: 1;
 }
 
-/* ============================================
-   STATISTICS
-   ============================================ */
-
+/* Statistics */
 .stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -324,10 +231,7 @@ body {
   color: var(--primary-color);
 }
 
-/* ============================================
-   SETTINGS TOGGLE
-   ============================================ */
-
+/* Settings Toggle */
 .settings-toggle {
   display: flex;
   align-items: center;
@@ -341,7 +245,6 @@ body {
   font-weight: 500;
 }
 
-/* Toggle Switch */
 .switch {
   position: relative;
   display: inline-block;
@@ -385,78 +288,4 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(22px);
-}
-
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
-
-@media (max-width: 480px) {
-  .timer-card {
-    padding: var(--spacing-lg);
-  }
-  
-  .title {
-    font-size: var(--font-size-xl);
-  }
-  
-  .timer {
-    font-size: 2.5rem;
-  }
-  
-  .progress-ring {
-    width: 240px;
-    height: 240px;
-  }
-  
-  .controls {
-    flex-direction: column;
-  }
-}
-
-/* ============================================
-   ACCESSIBILITY
-   ============================================ */
-
-.control-btn:focus,
-.mode-btn:focus {
-  outline: 3px solid var(--primary-color);
-  outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* ============================================
-   ANIMATIONS
-   ============================================ */
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.timer.running {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-  20%, 40%, 60%, 80% { transform: translateX(5px); }
-}
-
-.timer-card.shake {
-  animation: shake 0.5s ease-in-out;
 }
