@@ -145,9 +145,9 @@ npx serve
 
 ### Timer Modes
 
-- ** Focus** (25min): Deep work session
-- ** Short Break** (5min): Quick rest
-- ** Long Break** (15min): Extended rest after 4 sessions
+- **Focus** (25min): Deep work session
+- **Short Break** (5min): Quick rest
+- **Long Break** (15min): Extended rest after 4 sessions
 
 ### Features
 
@@ -251,9 +251,9 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 
 <div align="center">
 
-** Star this repo if you find it helpful!**
+**⭐ Star this repo if you find it helpful!**
 
-Made with  using the Pomodoro Technique
+Made with ❤️ using the Pomodoro Technique
 
 [ Back to top](#-focus-timer---professional-pomodoro-app)
 
