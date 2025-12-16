@@ -105,31 +105,103 @@ See [Architecture Documentation](docs/ARCHITECTURE.md) for details.
 
 ##  Quick Start
 
-### Option 1: Direct Open
+### Prerequisites
+
+**Required:**
+- **Node.js** v22.21.1+ (or any modern version)
+- **npm** v10.5.0 or v10.8.2 recommended
+  - ⚠️ **Avoid npm v10.9.x** - has postinstall script bugs
+- **Modern Browser** with ES6 module support (Chrome 61+, Firefox 60+, Safari 11+, Edge 16+)
+
+**Environment Notes:**
+- Project uses **Vite** v4.5.14 as dev server
+- ES6 modules require proper module loading (local server or Vite)
+- Windows users may need to run PowerShell with appropriate permissions
+
+---
+
+### Setup Instructions
+
+#### 1. Clone the Repository
 ```bash
-# Clone the repository
 git clone https://github.com/yourusername/pomodoro-timer.git
 cd pomodoro-timer
-
-# Open index.html in browser
-start index.html  # Windows
-open index.html   # macOS
 ```
 
-### Option 2: Local Server (Recommended for modules)
+#### 2. Install Dependencies
 ```bash
-# Python 3
+npm install
+```
+
+**⚠️ Troubleshooting npm Issues:**
+
+If you encounter `ERR_INVALID_ARG_TYPE` errors:
+
+```bash
+# Downgrade npm to a stable version
+npm install -g npm@10.5.0
+
+# Clear npm cache
+npm cache clean --force
+
+# Remove node_modules if corrupted
+Remove-Item -Path node_modules -Recurse -Force  # Windows PowerShell
+rm -rf node_modules                              # macOS/Linux
+
+# Reinstall
+npm install
+```
+
+**Common Issues:**
+- **Locked node_modules folders**: Close all editors/terminals accessing the project, wait 10 seconds, then retry
+- **Permission errors on Windows**: Run PowerShell as Administrator or use alternative shells
+- **EPERM errors**: Some Windows system commands may be restricted; use direct Vite binary if needed
+
+#### 3. Run Development Server
+
+**Method 1: Using npm scripts (Recommended)**
+```bash
+npm run dev
+```
+
+**Method 2: Direct Vite binary (If npm scripts fail)**
+```bash
+.\node_modules\.bin\vite           # Windows
+./node_modules/.bin/vite           # macOS/Linux
+```
+
+**Method 3: Python server (Fallback)**
+```bash
 python -m http.server 8000
-
-# Node.js
-npx serve
-
 # Visit http://localhost:8000
 ```
 
-### Browser Requirements
-- Modern browser with ES6 module support
-- Chrome 61+, Firefox 60+, Safari 11+, Edge 16+
+#### 4. Open in Browser
+
+Once Vite starts, open:
+```
+http://localhost:5173
+```
+
+You should see:
+```
+VITE v4.5.14 ready
+Local: http://localhost:5173/
+```
+
+---
+
+### Build for Production
+
+```bash
+# Build optimized production bundle
+npm run build
+
+# Preview production build
+npm run preview
+```
+
+Output will be in `dist/` folder.
 
 ---
 
@@ -161,6 +233,64 @@ npx serve
 
 ##  Development
 
+### Environment Setup
+
+**Tech Stack:**
+- **Vite** v4.5.14 - Fast HMR and optimized builds
+- **ES6 Modules** - Modern JavaScript module system
+- **No Framework** - Pure vanilla JavaScript
+- **LocalStorage** - Client-side persistence
+- **Web Audio API** - Sound effects
+- **Notifications API** - Browser notifications
+
+**Development Server Features:**
+- ⚡ Hot Module Replacement (HMR)
+- 🔧 Error overlay in browser
+- 📦 Automatic dependency resolution
+- 🎯 TypeScript ready (can migrate easily)
+
+### Known Issues & Solutions
+
+#### Issue 1: npm v10.9.x Postinstall Bug
+**Symptom:** `ERR_INVALID_ARG_TYPE: The "file" argument must be of type string`
+
+**Cause:** npm v10.9.x has a bug with esbuild/rollup postinstall scripts
+
+**Solution:**
+```bash
+npm install -g npm@10.5.0
+# or
+npm install -g npm@10.8.2
+```
+
+#### Issue 2: Corrupted node_modules
+**Symptom:** `EPERM: operation not permitted, rmdir`
+
+**Solution:**
+```bash
+# Close ALL editors, terminals, and IDEs
+# Wait 10 seconds for file handles to release
+Remove-Item -Path node_modules -Recurse -Force
+npm cache clean --force
+npm install
+```
+
+#### Issue 3: PowerShell Command Restrictions
+**Symptom:** `cmd`, `robocopy`, `takeown` not recognized
+
+**Cause:** Restricted PowerShell profile or execution policy
+
+**Solution:** Use direct Node.js/npm commands or switch to Windows Terminal with full permissions
+
+#### Issue 4: Vite Binary Not Found
+**Symptom:** `npm run dev` fails but Vite is installed
+
+**Solution:** Run Vite directly:
+```bash
+.\node_modules\.bin\vite  # Windows
+./node_modules/.bin/vite  # macOS/Linux
+```
+
 ### Code Style
 
 - **JavaScript**: ES6+ with modules, JSDoc comments
@@ -183,6 +313,62 @@ npx serve
    - Update UI display in `src/js/ui.js`
 
 See [API Documentation](docs/API.md) for module APIs.
+
+---
+
+##  Project Configuration
+
+### package.json Structure
+
+```json
+{
+  "name": "pomodoro-timer",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.5.0"
+  }
+}
+```
+
+**Key Points:**
+- `"type": "module"` - Enables ES6 modules
+- `"private": true"` - Prevents accidental npm publish
+- Vite scripts for dev, build, and preview
+
+### Vite Configuration
+
+No custom `vite.config.js` needed - uses defaults:
+- Entry: `index.html`
+- Base URL: `/`
+- Port: `5173`
+- HMR: Enabled
+- Build output: `dist/`
+
+### File Structure Requirements
+
+```
+pomodoro-timer/
+├── index.html          # MUST be at root (Vite entry point)
+├── package.json        # npm configuration
+├── node_modules/       # Dependencies (git-ignored)
+├── src/
+│   ├── css/           # Stylesheets
+│   └── js/            # JavaScript modules
+└── dist/              # Production build output (git-ignored)
+```
+
+**Important:**
+- `index.html` must import JS as `<script type="module">`
+- CSS can be linked normally in HTML
+- All JS files use `.js` extension
+- Relative imports must include file extension
 
 ---
 
@@ -238,6 +424,63 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 - **Inter Font** by Rasmus Andersson
 - **Inspiration** from modern productivity tools
 - **Community** for feedback and contributions
+
+---
+
+##  Troubleshooting Guide
+
+### Installation Problems
+
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `ERR_INVALID_ARG_TYPE` | npm v10.9.x bug | Downgrade: `npm install -g npm@10.5.0` |
+| `EPERM` on node_modules | File handles locked | Close all apps, wait 10s, retry |
+| `Cannot find module` | Missing dependencies | Run `npm install` |
+| `spawn cmd ENOENT` | Restricted shell | Use direct commands: `.\node_modules\.bin\vite` |
+| Vite not found | Local install issue | Check `.\node_modules\.bin\vite --version` |
+
+### Runtime Problems
+
+| Issue | Possible Cause | Fix |
+|-------|----------------|-----|
+| Blank page | Module loading error | Check browser console, use local server |
+| Timer doesn't start | JS error | Open DevTools console |
+| No notifications | Permission denied | Enable in browser settings |
+| No sound | Audio toggle off | Check sound toggle, browser autoplay policy |
+| Stats not saving | localStorage disabled | Enable cookies/storage in browser |
+
+### Environment Checks
+
+**Verify Installation:**
+```bash
+node --version    # Should show v22.21.1 or similar
+npm --version     # Should show v10.5.0 or v10.8.2
+```
+
+**Test Vite:**
+```bash
+.\node_modules\.bin\vite --version
+# Should show: vite/4.5.14 win32-x64 node-v22.21.1
+```
+
+**Check Project Structure:**
+```bash
+ls index.html     # Must exist at root
+ls src/js/main.js # Entry point
+ls node_modules/vite  # Vite installed
+```
+
+### Getting Help
+
+If issues persist:
+
+1. **Check existing issues**: [GitHub Issues](https://github.com/yourusername/pomodoro-timer/issues)
+2. **Create new issue** with:
+   - Node/npm versions (`node -v`, `npm -v`)
+   - Operating system
+   - Full error message
+   - Steps to reproduce
+3. **Ask in discussions**: [GitHub Discussions](https://github.com/yourusername/pomodoro-timer/discussions)
 
 ---
 

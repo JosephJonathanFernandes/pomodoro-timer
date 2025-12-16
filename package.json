@@ -1,0 +1,38 @@
+{
+  "name": "pomodoro-timer",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Professional Pomodoro Timer with Vite - ES6 Modules, Vanilla JS",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev:direct": "node_modules/.bin/vite",
+    "health-check": "node --version && npm --version && node_modules/.bin/vite --version"
+  },
+  "keywords": [
+    "pomodoro",
+    "timer",
+    "productivity",
+    "vanilla-js",
+    "vite",
+    "es6-modules"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^4.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=10.0.0 <10.9.0 || >=10.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/pomodoro-timer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/pomodoro-timer/issues"
+  }
+}
