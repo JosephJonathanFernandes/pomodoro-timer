@@ -58,47 +58,46 @@ Focus Timer is a production-ready Pomodoro Timer built with vanilla JavaScript u
 
 ### Project Structure
 
-\`\`\`
+```
 pomodoro-timer/
- src/
-    css/                   # Modular stylesheets
-       variables.css      # Design tokens
-       base.css           # Base styles
-       components.css     # UI components
-       animations.css     # Animations
-       responsive.css     # Media queries
-       accessibility.css  # A11y styles
-    js/                    # JavaScript modules
-        config.js          # Configuration
-        audio.js           # Audio manager
-        notifications.js   # Notification manager
-        storage.js         # Storage manager
-        ui.js              # UI manager
-        timer.js           # Timer logic
-        main.js            # Entry point
- docs/                      # Documentation
-    ARCHITECTURE.md        # Architecture details
-    API.md                 # API documentation
- .github/                   # GitHub templates
- index.html                 # Main HTML
- README.md                  # This file
- CONTRIBUTING.md            # Contribution guide
- LICENSE                    # MIT License
- .gitignore                 # Git ignore
-\`\`\`
+├── src/
+│   ├── css/                   # Modular stylesheets
+│   │   ├── variables.css      # Design tokens
+│   │   ├── base.css           # Base styles
+│   │   ├── components.css     # UI components
+│   │   ├── animations.css     # Animations
+│   │   ├── responsive.css     # Media queries
+│   │   └── accessibility.css  # A11y styles
+│   └── js/                    # JavaScript modules
+│       ├── config.js          # Configuration
+│       ├── audio.js           # Audio manager
+│       ├── notifications.js   # Notification manager
+│       ├── storage.js         # Storage manager
+│       ├── ui.js              # UI manager
+│       ├── timer.js           # Timer logic
+│       └── main.js            # Entry point
+├── docs/                      # Documentation
+│   ├── ARCHITECTURE.md        # Architecture details
+│   └── API.md                 # API documentation
+├── .github/                   # GitHub templates
+├── index.html                 # Main HTML
+├── README.md                  # This file
+├── CONTRIBUTING.md            # Contribution guide
+├── LICENSE                    # MIT License
+└── .gitignore                 # Git ignore
+```
 
 ### Module Dependencies
 
-\`\`\`
+```
 main.js
-  > timer.js
-       > config.js
-       > audio.js
-       > notifications.js
-       > storage.js
-       > ui.js
-  > Event Listeners
-\`\`\`
+  └── timer.js
+       ├── config.js
+       ├── audio.js
+       ├── notifications.js
+       ├── storage.js
+       └── ui.js
+```
 
 See [Architecture Documentation](docs/ARCHITECTURE.md) for details.
 
@@ -107,7 +106,7 @@ See [Architecture Documentation](docs/ARCHITECTURE.md) for details.
 ##  Quick Start
 
 ### Option 1: Direct Open
-\`\`\`bash
+```bash
 # Clone the repository
 git clone https://github.com/yourusername/pomodoro-timer.git
 cd pomodoro-timer
@@ -115,10 +114,10 @@ cd pomodoro-timer
 # Open index.html in browser
 start index.html  # Windows
 open index.html   # macOS
-\`\`\`
+```
 
 ### Option 2: Local Server (Recommended for modules)
-\`\`\`bash
+```bash
 # Python 3
 python -m http.server 8000
 
@@ -126,7 +125,7 @@ python -m http.server 8000
 npx serve
 
 # Visit http://localhost:8000
-\`\`\`
+```
 
 ### Browser Requirements
 - Modern browser with ES6 module support
